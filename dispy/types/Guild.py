@@ -80,7 +80,7 @@ async def get_guild_channels(guild_id): # returns a list of channels
     # API: GET /guilds/{guild.id}/channels
     pass
 
-async def create_guild_channel(guild_id, channel) -> Channel:
+async def create_guild_channel(guild_id, channel): # returns a channel
     # API: POST /guilds/{guild.id}/channels
     pass
 
