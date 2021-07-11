@@ -1,4 +1,5 @@
 import asyncio
+from dispy.types.minors.Connection import Connection
 
 class User:
     def __init__(self, args: dict) -> None:
@@ -42,7 +43,7 @@ async def create_dm(recipient_id): # returns a dm channel object
     # API: POST /users/@me/channels
     pass
 
-async def get_connections(): # returns list of connections objects
+async def get_connections() -> list(Connection): # returns list of connections objects
     # API: GET /users/@me/connections
     pass
 
