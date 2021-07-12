@@ -1,4 +1,5 @@
 import asyncio
+from dispy.types.User import User
 from dispy.types.minors.Message import Message
 
 class Channel:
@@ -64,3 +65,77 @@ async def create_reaction(channel_id, message_id, emoji): # 204 empty
     pass
 
 async def delete_own_reaction(channel_id, message_id, emoji): # 204 empty
+    # DELETE /channels/channel.id/messages/message.ic/reactions/emoji/@me
+    pass
+
+async def delete_user_reaction(channel_id, message_id, emoji, user_id): # 204 empty
+    # DELETE /channels/channel.id/messages/message.id/reactions/emoji/user.id
+    pass
+
+async def get_reactions(channel_id, message_id, emoji) -> list(User):
+    # GET /channels/channel.id/messages/message.id/reactions/emoji
+    pass
+
+async def delete_all_reactions(channel_id, message_id):
+    # DELETE /channels/channel.id/messages/message.id/reactions
+    pass
+
+async def delete_all_reactions_for_emoji(channel_id, message_id, emoji):
+    # DELETE /channels/channel.id/messages/message.id/reactions/emoji
+    pass
+
+async def edit_message(channel_id, message_id, json_params) -> Message:
+    # PATCH /channels/channel.id/messages/message.id
+    pass
+
+async def delete_message(channel_id, message_id):
+    # DELETE /channels/channel.id/messages/message.id
+    pass
+
+async def bulk_delete_mesages(channel_id, params):
+    # POST /channels/channel.id/messages
+    pass
+
+async def edit_channel_permissions(channel_id, overwrite_id):
+    # PUT /channels/channel.id/permissions/overwrite.id
+    pass
+
+async def get_channel_invites(channel_id):
+    # GET /channels/channel.id/invites
+    pass
+
+async def create_channel_invite(channel_id):
+    # POST /channels/channel.id/invites
+    pass
+
+async def delete_channel_permission(channel_id, overwrite_id):
+    # DELETE /channels/channel.id/permissions/overwrite.id
+    pass
+
+async def follow_news_channel(channel_id):
+    # POST /channels/channel.id/permissions/overwrite.id
+    pass
+
+async def trigger_typing_indicator(channel_id):
+    # POST /channels/channel.id/typing
+    pass
+
+async def get_pinned_messages(channel_id):
+    # GET /channels/channel.id/pins
+    pass
+
+async def pin_message(channel_id, message_id):
+    # PUT /channels/channel.id/pins/message_id
+    pass
+
+async def unpin_message(channel_id, message_id):
+    # DELETE /channels/channel.id/pins/message.id
+    pass
+
+async def group_dm_add_recipient(channel_id, user_id):
+    # PUT /channels/channel.id/recipients/user.id
+    pass
+
+async def group_dm_remove_recipient(channel_id, user_id):
+    # DELETE /channels/channel.id/recipients/user.id
+    pass
