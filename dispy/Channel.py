@@ -1,6 +1,6 @@
 import asyncio
-from dispy.types.User import User
-from dispy.types.minors.Message import Message
+from User import User
+from Message import Message
 
 class Channel:
     def __init__(self, data: dict) -> None:

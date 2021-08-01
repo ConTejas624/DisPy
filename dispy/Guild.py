@@ -1,5 +1,5 @@
 
-from dispy.types.User import User
+from User import User
 import asyncio
 
 

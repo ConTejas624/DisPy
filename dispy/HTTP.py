@@ -2,7 +2,7 @@ import asyncio
 import enum
 import aiohttp
 import sys
-from resources import __version__
+from .. import __version__
 
 class HTTP(enum.Enum):
     GET = "GET"
@@ -12,10 +12,9 @@ class HTTP(enum.Enum):
     DEL = "DELETE"
 
 class Routes(enum.Enum):
-    BASE = 'https://discord.com/api'
-    VERSION = '/v9'
+    BASE = 'https://discord.com/api/v9'
 
-class API:
+class HTTPClient:
     def __init__(self, token) -> None:
 
         self.headers = {
@@ -26,7 +25,7 @@ class API:
         }
 
     async def __request(self, extension, payload=None) -> dict:
-        url = Routes.BASE + Routes.VERSION + extension
+        url = Routes.BASE + extension
         async with aiohttp.ClientSession() as session:
             if not payload == None:
                 async with session.get(url, headers=self.headers, payload=payload) as response:
@@ -35,4 +34,11 @@ class API:
                 async with session.get(url, headers=self.headers) as response:
                     return await response.json()
     
-    async def __post(self, extension, )
+    async def __post(self, extension, payload):
+        url = Routes.BASE + extension
+        async with aiohttp.ClientSession() as session:
+            async with session.post(url, headers=self.headers, payload=payload) as response:
+                    return await response.json()
+
+# testing
+client = HTTPClient.__init__(token='NTcwNDI3MzYxMDExNjk1NjM3.XL_B4A.dcO2ayE-_60Hk7Qzzxr2lgJSvQc')

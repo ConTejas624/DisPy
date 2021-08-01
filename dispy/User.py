@@ -1,5 +1,5 @@
 import asyncio
-from dispy.types.minors.Connection import Connection
+from Connection import Connection
 
 class User:
     def __init__(self, args: dict) -> None:
