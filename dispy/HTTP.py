@@ -2,7 +2,7 @@ import asyncio
 import enum
 import aiohttp
 import sys
-from .. import __version__
+from . import __version__
 
 class HTTP(enum.Enum):
     GET = "GET"
@@ -39,6 +39,3 @@ class HTTPClient:
         async with aiohttp.ClientSession() as session:
             async with session.post(url, headers=self.headers, payload=payload) as response:
                     return await response.json()
-
-# testing
-client = HTTPClient.__init__(token='NTcwNDI3MzYxMDExNjk1NjM3.XL_B4A.dcO2ayE-_60Hk7Qzzxr2lgJSvQc')
