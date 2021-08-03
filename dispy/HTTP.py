@@ -1,8 +1,10 @@
 import asyncio
 import enum
+import re
 import aiohttp
 import sys
-from . import __version__
+#from . import __version__
+__version__ = 'test build'
 
 class HTTP(enum.Enum):
     GET = "GET"
@@ -20,22 +22,33 @@ class HTTPClient:
         self.headers = {
             'User-Agent': 'DiscordBot (https://github.com/ConTejas624/DisPy {0}) Python/{1[0]}.{1[1]} aiohttp/{2}'.format(
                 __version__, sys.version_info, aiohttp.__version__),
-            'Authorization': 'Bot ' + token,
-            'Content-Type': 'application/json'
+            'Authorization': 'Bot ' + token
         }
 
-    async def __request(self, extension, payload=None) -> dict:
-        url = Routes.BASE + extension
-        async with aiohttp.ClientSession() as session:
-            if not payload == None:
-                async with session.get(url, headers=self.headers, payload=payload) as response:
-                    return await response.json()
-            else:
-                async with session.get(url, headers=self.headers) as response:
-                    return await response.json()
+    async def get(self, session: aiohttp.ClientSession, extension: str, data=None) -> dict:
+        url = 'https://discord.com/api/v9' + extension
+        if not data == None:
+            async with session.get(url, headers=self.headers, data=data) as response:
+                return await response.json()
+        else:
+            async with session.get(url, headers=self.headers) as response:
+                return await response.json()
     
-    async def __post(self, extension, payload):
+    async def post(self, session: aiohttp.ClientSession, extension, data):
+        url = 'https://discord.com/api/v9' + extension
+        async with session.post(url, headers=self.headers, data=data) as response:
+            return await response.json()
+    
+    async def delete(self, session: aiohttp.ClientSession, extension, data=None):
         url = Routes.BASE + extension
-        async with aiohttp.ClientSession() as session:
-            async with session.post(url, headers=self.headers, payload=payload) as response:
-                    return await response.json()
+        if not data == None:
+            async with session.delete(url, headers=self.headers, data=data) as response:
+                return await response.json()
+        else:
+            async with session.delete(url, headers=self.headers) as response:
+                return await response.json()
+    
+    async def patch(self, session: aiohttp.ClientSession, extension, data):
+        url = Routes.BASE + extension
+        async with session.patch(url, headers=self.headers, data=data) as response:
+            return await response.json()
