@@ -3,7 +3,8 @@ import enum
 import re
 import aiohttp
 import sys
-#from . import __version__
+
+
 __version__ = 'test build'
 
 class HTTP(enum.Enum):
