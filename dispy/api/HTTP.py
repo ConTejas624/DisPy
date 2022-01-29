@@ -1,21 +1,11 @@
 import asyncio
-import enum
-import re
 import aiohttp
 import sys
 
 
 __version__ = 'test build'
+__base_url__ = 'https://discord.com/api/v9'
 
-class HTTP(enum.Enum):
-    GET = "GET"
-    POS = "POST"
-    PUT = "PUT"
-    PTC = "PATCH"
-    DEL = "DELETE"
-
-class Routes(enum.Enum):
-    BASE = 'https://discord.com/api/v9'
 
 class HTTPClient:
     def __init__(self, token) -> None:
@@ -27,7 +17,7 @@ class HTTPClient:
         }
 
     async def get(self, session: aiohttp.ClientSession, extension: str, data=None) -> dict:
-        url = 'https://discord.com/api/v9' + extension
+        url = __base_url__ + extension
         if not data == None:
             async with session.get(url, headers=self.headers, data=data) as response:
                 return await response.json()
@@ -36,12 +26,12 @@ class HTTPClient:
                 return await response.json()
     
     async def post(self, session: aiohttp.ClientSession, extension, data):
-        url = 'https://discord.com/api/v9' + extension
+        url = __base_url__ + extension
         async with session.post(url, headers=self.headers, data=data) as response:
             return await response.json()
     
     async def delete(self, session: aiohttp.ClientSession, extension, data=None):
-        url = Routes.BASE + extension
+        url = __base_url__ + extension
         if not data == None:
             async with session.delete(url, headers=self.headers, data=data) as response:
                 return await response.json()
@@ -50,6 +40,6 @@ class HTTPClient:
                 return await response.json()
     
     async def patch(self, session: aiohttp.ClientSession, extension, data):
-        url = Routes.BASE + extension
+        url = __base_url__ + extension
         async with session.patch(url, headers=self.headers, data=data) as response:
             return await response.json()
